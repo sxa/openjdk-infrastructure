@@ -13,6 +13,8 @@
 |  Marist |  build-marist-s390x-ubuntu-16.04-3 |  148.100.33.179 | s390x  | Ubuntu16.04  |  linux1 ||
 |  Marist |  build-marist-s390x-zOS-1 |  148.100.36.136 | s390x  | zOS 2.1  |  OPEN1 ||
 |  Marist |  build-marist-s390x-zOS-2 |  148.100.36.137 | s390x  | zOS 2.1  |  OPEN1 ||
+|  Marist |  jck-marist-s390x-ubuntu-16.04-1 |  148.100.33.183 | s390x  | Ubuntu16.04  |  linux1 ||
+|  Marist |  jck-marist-s390x-ubuntu-16.04-2 |  148.100.33.184 | s390x  | Ubuntu16.04  |  linux1 ||
 |  osuosl |  build-osuosl-ppc64le-centos-7.2 |  140.211.168.138 | ppc64le  | Centos72  |  centos ||
 |  osuosl |  build-osuosl-ppc64le-fedora-24-1 |  140.211.168.134 | ppc64le  | Fedora 24  |  fedora ||
 |  osuosl |  build-osuosl-ppc64le-fedora-24-2 |  140.211.168.139 | ppc64le  | Fedora 24  |  fedora ||
@@ -32,6 +34,7 @@
 |  Joyent |  build-joyent-x64-freebsd-11-1  | 165.225.138.105 | x64 | FreeBSD11-1  |  root ||
 |  Joyent |  build-joyent-x64-ubuntu-16.04-1  | 37.153.108.134 | x64 | Ubuntu16.04  |  root ||
 |  Joyent |  build-joyent-x64-ubuntu-16.04-2  | 37.153.108.194  | x64 | Ubuntu16.04  |  root ||
+|  Joyent |  jck-joyent-x64-windows-2012r2 | 165.225.150.83  | x64 | Win Server 2012r2 | Administrator ||
 |  Scaleway |  build-scaleway-x64-ubuntu-16.04-2  |  51.15.46.107 | x64 |  Ubuntu16.04 | root ||
 |  Scaleway |  build-scaleway-armv7-ubuntu16.04-1  |  212.47.233.28 | arm  |  Ubuntu16.04 | root ||
 |  Scaleway |  build-scaleway-armv7-ubuntu16.04-2  |  212.47.246.7 | arm  |  Ubuntu16.04 | root ||
