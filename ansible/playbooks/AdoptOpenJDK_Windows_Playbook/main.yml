@@ -26,9 +26,10 @@
   #########
   roles:
     - Debug
+    - Version
     - Common
     - Windows_Updates
-    - Jenkins_User
+    - Jenkins
     - cygwin
     - Firefox
     - Strawberry_Perl
@@ -39,9 +40,14 @@
     - Java7
     - Java8
     - Java9
+    - Java11
     - ANT
     - MSVS_2010
     - MSVS_2013
     - MSVS_2017
     - NVidia_Cuda_Toolkit
     - NTP_TIME
+    - 7-Zip
+    - MinGW-W64
+    - OpenSSL
+    - nasm
