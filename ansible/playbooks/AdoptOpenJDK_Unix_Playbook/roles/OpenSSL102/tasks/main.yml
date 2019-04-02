@@ -43,7 +43,7 @@
     - ((openssl_version.stdout == '') or ((openssl_version.stdout != '') and (openssl_version.stdout | version_compare('1.0.2', operator='lt', strict=True))))
   tags: openssl
 
-- name: Remove downloaded packages for OpenSSL v1.1.0g
+- name: Remove downloaded packages for OpenSSL v1.0.2r
   file:
     path: "{{ item }}"
     state: absent
