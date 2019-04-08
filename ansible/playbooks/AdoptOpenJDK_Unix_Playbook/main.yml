@@ -38,7 +38,8 @@
     - adoptopenjdk9               # JDK10 build bootstrap
     - adoptopenjdk10              # JDK11 build bootstrap
     - adoptopenjdk11              # JDK12 build bootstrap
-    - OpenSSL                     # OpenJ9
+    - OpenSSL102                  # OpenJ9
+    - OpenSSL                     # OpenJ9 JITaaS
     - Protobuf                    # OpenJ9
     - Nagios_Plugins              # AdoptOpenJDK Infrastructure
     - Nagios_Master_Config        # AdoptOpenJDK Infrastructure
