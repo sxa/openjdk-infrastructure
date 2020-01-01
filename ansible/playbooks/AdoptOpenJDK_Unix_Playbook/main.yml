@@ -12,6 +12,7 @@
       # Set standard variables
         - name: Load AdoptOpenJDKs variable file
           include_vars: group_vars/all/adoptopenjdk_variables.yml
+
   environment:
     PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
 
@@ -19,6 +20,7 @@
   # Roles #
   #########
   roles:
+    - bootstrap
     - Debug
     - Version
     - Common
