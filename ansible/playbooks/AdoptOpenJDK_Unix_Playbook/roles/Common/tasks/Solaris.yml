@@ -17,7 +17,7 @@
 
 - name: Fetch CSWpkgutil.pkg
   copy:
-    src: roles/Common/files/CSWpkgutil.pkg
+    src: ../files/CSWpkgutil.pkg
     dest: /tmp/CSWpkgutil.pkg
     force: yes
   when: pkgutil_installed.rc != 0
