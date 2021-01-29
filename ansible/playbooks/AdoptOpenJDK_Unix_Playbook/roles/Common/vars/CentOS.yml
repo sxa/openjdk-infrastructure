@@ -67,7 +67,6 @@ Additional_Build_Tools_CentOS8:
   - glibc-langpack-zh             # required for creating Chinese locales
 
 Additional_Build_Tools_NOT_CentOS8:
-  - libdwarf-devel
   - lbzip2
   - java-1.7.0-openjdk-devel
   - ntp

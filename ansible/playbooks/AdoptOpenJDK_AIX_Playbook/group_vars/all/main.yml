@@ -15,12 +15,12 @@ Sudoers_File: /etc/sudoers
 
 # Jenkins User Variables:
 Jenkins_Username: jenkins
-Jenkins_User_SSHKey: /Vendor_Files/keys/id_rsa.pub
+Jenkins_User_SSHKey: /Vendor_Files/Jenkins_User_SSHKey
 
 # Superuser Variables:
 Superuser_Account: Enabled
 # Zeus_Username: zeus
-Zeus_User_SSHKey: /Vendor_Files/keys/zeus.key
+Zeus_User_SSHKey: /Vendor_Files/Zeus_User_SSHKey
 
 # Nagios Variables:
 Nagios_Plugins: Enabled
@@ -35,7 +35,7 @@ jckftp_Username: jckftp
 
 # Jcktestr User Variables:
 Jcktestr_Username: jcktestr
-Jcktestr_User_SSHKey: /Vendor_Files/keys/keybox.key
+Jcktestr_User_SSHKey: /Vendor_Files/Keybox_SSHKey
 
 # Vendor Variables:
 Vendor_File: Disabled
