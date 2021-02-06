@@ -2,6 +2,26 @@
 ###########
 # Crontab #
 ###########
+
+- set_fact: crontab_patching="/opt/csw/bin/pkgutil --upgrade --yes"
+  when: ansible_distribution == "Solaris"
+
+- set_fact: crontab_patching="/usr/sbin/pkg update && /usr/sbin/pkg upgrade -y"
+  when: ansible_distribution == FreeBSD
+
+- set_fact: crontab_patching="/usr/bin/zypper refresh && /usr/bin/zypper -n up"
+  when: ansible_distribution == openSUSE or ansible_distribution == SLES
+
+- set_fact: crontab_patching="/usr/bin/apt-get update && /usr/bin/apt-get -y upgrade"
+  when: ansible_distribution == Debian or ansible_distribution == Ubuntu
+
+- set_fact: crontab_patching="/usr/bin/yum -y update"
+  when: ansible_distribution == CentOS
+
+- set_fact: crontab_patching="/usr/bin/yum -y update && yum clean packages"
+  when: ansible_distribution == RedHat
+
+
 - name: Add cron job to check for updates
   cron: name="Check for updates everyday at 1am"
         weekday="*"

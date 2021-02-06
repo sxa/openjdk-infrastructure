@@ -24,3 +24,9 @@
       - "Nagios_Monitoring: {{ Nagios_Monitoring | default('***Undefined***') }}"
       - "Nagios_Master_IP: {{ Nagios_Master_IP | default('***Undefined***') }}"
   tags: debug
+
+- name: Record playbook start time in /var/log/ansiblerun.log
+  lineinfile:
+    dest: /var/log/ansiblerun.log
+    line: {{ ansible_date_time.iso8601_basic_short }} START on {{ inventory_hostname }}
+  tags: ansiblerunlog
