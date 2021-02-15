@@ -13,7 +13,7 @@
     - ansible_distribution == "FreeBSD"
 
 - name: Install Build Tool Packages
-  package: "name={{ item }} state={{ package_var }}"
+  ant: "name={{ item }} state={{ package_var }} cache_valid_time=600"
   with_items: "{{ Build_Tool_Packages }}"
   tags: build_tools
 

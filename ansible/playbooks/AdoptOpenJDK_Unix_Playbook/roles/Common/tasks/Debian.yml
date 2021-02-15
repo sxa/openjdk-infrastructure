@@ -21,6 +21,7 @@
   apt:
     name: gnupg
     state: present
+    cache_valid_time: 900
   tags: patch_update
 
 - name: Add AdoptOpenJDK GPG key
@@ -117,18 +118,18 @@
 # Additional build tools #
 ##########################
 - name: Call gcc-7 for all but arm32
-  package: "name={{ item }} state=latest"
+  apt: "name={{ item }} state=latest" cache_valid_time=600
   with_items: "{{ gcc_7 }}"
   when: ansible_architecture != "armv7l"
   tags: build_tools
 
 - name: Call Build Packages and Tools Task for OpenJFX
-  package: "name={{ item }} state=latest"
+  apt: "name={{ item }} state=latest" cache_valid_time=600
   with_items: "{{ OpenJFX_Build_Tool_Packages }}"
   tags: [build_tools, build_tools_jfx]
 
 - name: Install GCC G++ on supported platforms
-  package: "name={{ item }} state=latest"
+  apt: "name={{ item }} state=latest" cache_valid_time=600
   with_items: "{{ gcc_compiler }}"
   when:
     - (ansible_distribution_major_version != "9" and ansible_architecture != "armv7l")
@@ -136,7 +137,7 @@
   tags: build_tools
 
 - name: Install GCC G++ on Raspian Buster
-  package: "name={{ item }} state=latest"
+  apt: "name={{ item }} state=latest" cache_valid_time=600
   with_items:
     - gcc-4.8
     - g++-4.8
@@ -145,28 +146,28 @@
   tags: build_tools
 
 - name: Install additional build tools for x86_64
-  package: "name={{ item }} state=latest"
+  apt: "name={{ item }} state=latest" cache_valid_time
   with_items: "{{ Additional_Build_Tools_x86_64 }}"
   when:
     - ansible_architecture == "x86_64"
   tags: build_tools
 
 - name: Install additional build tools for PPC64LE
-  package: "name={{ item }} state=latest"
+  apt: "name={{ item }} state=latest" cache_valid_time
   with_items: "{{ Additional_Build_Tools_ppc64le }}"
   when:
     - ansible_architecture == "ppc64le"
   tags: build_tools
 
 - name: Install additional build tools for S390x
-  package: "name={{ item }} state=latest"
+  apt: "name={{ item }} state=latest" cache_valid_time=600
   with_items: "{{ Additional_Build_Tools_s390x }}"
   when:
     - ansible_architecture == "s390x"
   tags: build_tools
 
 - name: Install additional build tools for aarch64
-  package: "name={{ item }} state=latest"
+  apt: "name={{ item }} state=latest" cache_valid_time=600
   with_items: "{{ Additional_Build_Tools_aarch64 }}"
   when:
     - ansible_architecture == "aarch64"
@@ -176,14 +177,14 @@
 # Additional Test Tools #
 #########################
 - name: Install additional Test Tool Packages for x86_64
-  package: "name={{ item }} state=latest"
+  apt: "name={{ item }} state=latest" cache_valid_time=600
   with_items: "{{ Test_Tool_Packages_x86_64 }}"
   when:
     - ansible_architecture == "x86_64"
   tags: test_tools
 
 - name: Install additional Packages specific to Debian 8
-  package: "name={{ item }} state=latest"
+  apt: "name={{ item }} state=latest" cache_valid_time=600
   with_items: "{{ Additional_Packages_Debian8 }}"
   when:
     - ansible_distribution_major_version == "8"
@@ -194,9 +195,10 @@
 ##################
 
 - name: Install 'locales' package
-  package:
+  apt:
     name: locales
     state: present
+    cache_valid_time: 600
   tags: locales
 
 - name: Enable ja_JP locale
