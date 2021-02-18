@@ -18,7 +18,7 @@
   tags: MSVS_2013
 
 - name: Install Visual Studio Community 2013
-  raw: 'C:\TEMP\vs2013_community.exe /Silent /NoRestart
+  raw: 'C:\TEMP\vs2013_community.exe /Silent /NoRestart /Nocache
         /Log C:\TEMP\vs2013_install_log.txt'
   when: (not vs2013_installed.stat.exists)
   tags: MSVS_2013

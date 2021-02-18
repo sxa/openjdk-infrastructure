@@ -21,7 +21,7 @@
   tags: MSVS_2019
 
 - name: Install Visual Studio Community 2019
-  win_shell: 'C:\temp\vs_community19.exe --wait --add Microsoft.VisualStudio.Workload.NativeDesktop;includeRecommended;includeOptional --quiet --norestart'
+  win_shell: 'C:\temp\vs_community19.exe --wait --add Microsoft.VisualStudio.Workload.NativeDesktop;includeRecommended;includeOptional --quiet --norestart --nocache'
   args:
     executable: cmd
   when: (not vs2019_installed.stat.exists)

@@ -18,7 +18,7 @@
   tags: MSVS_2010
 
 - name: Install Visual Studio 2010 Professional
-  raw: 'C:\temp\vs2010_professional.exe /q /norestart'
+  raw: 'C:\temp\vs2010_professional.exe /q /norestart /nocache'
   when: (not vs2010_installed.stat.exists)
   tags: MSVS_2010
 
