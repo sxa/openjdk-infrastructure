@@ -71,10 +71,14 @@
       when: ansible_architecture == 'x86_64'
       tags: [build_tools, build_tools_openj9]
     - role: zulu7                 # JDK8 Build Bootstrap
-      when: ansible_distribution != "MacOSX"
+      when:
+        - ansible_distribution != "MacOSX"
+        - ansible_architecture != "riscv64"
     - role: adoptopenjdk_install
       jdk_version: 8
-      when: ansible_distribution != "Alpine"
+      when:
+        - ansible_distribution != "Alpine"
+        - ansible_architecture != "riscv64"
       tags: build_tools
     - role: adoptopenjdk_install  # JDK11 Build Bootstrap
       jdk_version: 10
@@ -82,14 +86,18 @@
         - ansible_distribution != "Alpine"
         - ansible_distribution != "MacOSX"
         - ansible_distribution != "Solaris"
+        - ansible_architecture != "riscv64"
       tags: build_tools
     - role: adoptopenjdk_install
       jdk_version: 11
-      when: ansible_distribution != "Alpine" and ansible_distribution != "Solaris"
+      when:
+        - ansible_distribution != "Alpine"
+        - ansible_distribution != "Solaris"
+        - ansible_architecture != "riscv64"
       tags: build_tools
     - role: adoptopenjdk_install  # JDK16 Build Bootstrap
       jdk_version: 15
-      when: ansible_distribution != "Alpine" and ansible_distribution != "Solaris"
+      when: ansible_distribution != "Alpine" and ansible_distribution != "Solaris" and ansible_distribution != "riscv64"
       tags: build_tools
     - OpenSSL102                  # OpenJ9
     - role: Nagios_Plugins        # AdoptOpenJDK Infrastructure
@@ -98,7 +106,7 @@
       tags: [nagios_master_config, adoptopenjdk]
     - role: Nagios_Tunnel         # AdoptOpenJDK Infrastructure
       tags: [nagios_tunnel, adoptopenjdk]
-    - riscv_cross_compiler        # For building JDK11/J9 on RISC-V architecture
+    - riscv_cross_compiler          # For building JDK11/J9 on RISC-V architecture
     - Clean_Up
     - Security
     - Vendor

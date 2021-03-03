@@ -27,13 +27,13 @@
     # TODO: write a condition when NOT to run this step
     - skip_ansible_lint
 
-- name: Start NTP for Ubuntu and SLES 11
+- name: Start NTP for Ubuntu, Debian and SLES 11
   service:
     name: ntp
     state: restarted
     enabled: yes
   when:
-    - (ansible_distribution == "Ubuntu") or (ansible_distribution == "SLES" and ansible_distribution_major_version == "11")
+    - (ansible_distribution == "Ubuntu") or (ansible_distribution == "Debian") or (ansible_distribution == "SLES" and ansible_distribution_major_version == "11")
   tags: ntp_time
 
 - name: Start NTP for RedHat, SLES 12 and CentOS 7
