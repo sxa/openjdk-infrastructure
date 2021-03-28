@@ -13,7 +13,6 @@
   apt_repository: repo='ppa:openjdk-r/ppa' update_cache=no
   when:
     - ansible_architecture != "armv7l"
-    - ansible_architecture != "riscv64"
     - ansible_distribution_major_version != "10"
   tags: patch_update
 
@@ -106,8 +105,6 @@
     upgrade: safe
     update_cache: yes
     force: yes
-  when:
-    - ansible_architecture != "riscv64"
   tags: patch_update
 
 ############################
@@ -122,9 +119,7 @@
 - name: Call gcc-7 for all but arm32
   package: "name={{ item }} state=latest"
   with_items: "{{ gcc_7 }}"
-  when:
-    - ansible_architecture != "armv7l"
-    - ansible_architecture != "riscv64"
+  when: ansible_architecture != "armv7l"
   tags: build_tools
 
 - name: Call Build Packages and Tools Task for OpenJFX
