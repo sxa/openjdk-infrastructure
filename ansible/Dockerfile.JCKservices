@@ -1,0 +1,27 @@
+FROM ubuntu:18.04
+# Run docker build with --build-arg ftppasswd=somepassword
+
+ARG ftpuser=jckftp
+ARG ftppasswd
+ENV ftppasswd=$ftppasswd
+
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install ant ftpd gcc krb5-kdc krb5-admin-server pwgen tomcat8 unzip
+
+RUN useradd -c "JCK FTP account" -d /home/${ftpuser} -m ${ftpuser}
+RUN echo ${ftpuser}:${ftppasswd} | chpasswd
+RUN touch /home/${ftpuser}/filename.txt
+RUN chmod 0755 /home/${ftpuser}/filename.txt
+COPY playbooks/conf/krb5.conf /etc/krb5.conf
+RUN chmod 0644 /etc/krb5.conf
+RUN kdb5_util create -r ADOPTIUM_NET -W -s -P "`pwgen -1`"
+RUN kadmin.local -q "addprinc -pw `pwgen -1` admin/admin@ADOPTIUM_NET"
+RUN kadmin.local -q "addprinc -pw user1 user1/jckservices.adoptium.net@ADOPTIUM.NET"
+RUN kadmin.local -q "addprinc -pw user2 user2/jckservices.adoptium.net@ADOPTIUM.NET"
+RUN kadmin.local -q getprincs | egrep '^admin/admin@|^user1/|^user2/' > krb5.jckusers.txt; if test $(wc -l < krb5.jckusers.txt) -ne 3; then echo Wrong number of users - expected 3:; cat krb5.jckusers.txt; rm krb5.jckusers.txt; exit 1; fi
+RUN echo '*/admin *' > /etc/krb5kdc/kadm5.acl
+EXPOSE 8080
+EXPOSE 88
+EXPOSE 20
+EXPOSE 21
+CMD (service tomcat8 start || true) && service krb5-admin-server start && service krb5-kdc start && service openbsd-inetd start && tail -f /var/log/tomcat8/catalina.out

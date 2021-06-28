@@ -1,15 +1,15 @@
 ---
-###############################################
-# AdoptOpenJDK Ansible JCK svcs Playbook for: #
-# -------- Ubuntu 16 (tested on x64) -------- #
-###############################################
+###########################################
+# Adoptium Ansible JCK svcs Playbook for: #
+# ------ Ubuntu 16 (tested on x64) ------ #
+###########################################
 
 - hosts: all
   user: root
   become: yes
   tasks:
     - block:
-        - name: Load AdoptOpenJDKs variable file
+        - name: Load Adoptium variable file
           include_vars: variables/adoptopenjdk_variables.yml
         - name: OS update -- apt-get upgrade
           apt: upgrade=safe update_cache=yes
@@ -61,16 +61,16 @@
             backup: yes
 
         - name: Configure kerberos server
-          command: kdb5_util create -r ADOPTOPENJDK_NET -W -s -P `pwgen -1`
+          command: kdb5_util create -r ADOPTIUM_NET -W -s -P `pwgen -1`
           args:
             creates: /etc/krb5kdc/principal.kadm5
 
         - name: Run shell scripts
           shell: "{{ item }}"
           with_items:
-            - kadmin.local -q "addprinc -pw `pwgen -1` admin/admin@ADOPTOPENJDK_NET"
-            - kadmin.local -q "addprinc -pw user1 user1/jckservices.adoptopenjdk.net@ADOPTOPENJDK_NET"
-            - kadmin.local -q "addprinc -pw user2 user2/jckservices.adoptopenjdk.net@ADOPTOPENJDK_NET"
+            - kadmin.local -q "addprinc -pw `pwgen -1` admin/admin@ADOPTIUM_NET"
+            - kadmin.local -q "addprinc -pw user1 user1/jckservices.adoptopenjdk.net@ADOPTIUM_NET"
+            - kadmin.local -q "addprinc -pw user2 user2/jckservices.adoptopenjdk.net@ADOPTIUM_NET"
             - kadmin.local -q getprincs | egrep '^admin/admin@|^user1/|^user2/' > krb5.jckusers.txt; if test $(wc -l < krb5.jckusers.txt) -ne 3; then echo Wrong number of users - expected 3:; cat krb5.jckusers.txt; rm krb5.jckusers.txt; exit 1; fi
           args:
             creates: krb5.jckusers.txt
